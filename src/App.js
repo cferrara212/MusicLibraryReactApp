@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import axios from 'axios';
 import DisplaySongs from './Components/DisplaySongs'
+import SongCreateForm from './Components/SongForm';
 
 class App extends Component {
  constructor(props){
@@ -13,7 +14,8 @@ class App extends Component {
          title:'',
          artist:'',
          album:'',
-         release_date:null
+         release_date:null,
+         genre:''
        }
      ],
    };
@@ -30,34 +32,27 @@ class App extends Component {
    
  }
 
- renderSongsTable = () => {
-   return this.state.songs.map((song,index)=> {
-     const {id, title, artist,album, release_date} = song
-     return(
-       <tr key='id'>
-         <td>{id}</td>
-         <td>{title}</td>
-         <td>{artist}</td>
-         <td>{album}</td>
-         <td>{release_date}</td>
-       </tr>
-     )
-   })
+ 
+
+ deleteSong = async (id) => {
+
+    await axios.delete(`http://127.0.0.1:8000/music/${id}/`);
+    this.getSongs();
  }
 
- renderSongsHeader = () => {
-   let header = Object.keys(this.state.songs[0])
-   return header.map((key,index) => {
-     return <th key={index}>{key.toUpperCase()}</th>
-   })
+ createSong = async (newSong) =>{
+   console.log('from createSong', newSong)
+   await axios.post('http://127.0.0.1:8000/music/', newSong);
+   this.getSongs();
  }
  
  render() {
-  console.log('state of songs', this.state.songs)
+  console.log('state of songs', this.state.songs);
   return (
     
     <div className="App">
-      <DisplaySongs songHeader={this.renderSongsHeader} songTable={this.renderSongsTable} />
+      <DisplaySongs songs={this.state.songs} deleteSong={this.deleteSong} />
+      <SongCreateForm createSong={this.createSong} />
     </div>
   );
 }
