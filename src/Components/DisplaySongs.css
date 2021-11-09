@@ -1,0 +1,30 @@
+#title{
+    color: peachpuff;
+    text-decoration: underline;
+    text-align: center;
+}
+
+#table{
+    text-align: center;
+    font-family: cursive;
+    width: 100%;
+}
+
+#table td, #table th{
+    border: 3px solid peachpuff;
+}
+
+  
+#table tr:hover {background-color: rgb(202, 200, 200);}
+
+
+.button-two{
+    display: inline-block;
+    height: 100%;
+    color: rosybrown;
+    border: 0;
+    bottom: 0;
+    cursor: pointer;
+    font-size: 100%;
+    background-color: peachpuff;
+}

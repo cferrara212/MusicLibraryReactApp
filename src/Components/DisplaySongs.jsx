@@ -1,4 +1,5 @@
 import React from 'react';
+import './DisplaySongs.css'
 
 
 
@@ -17,10 +18,10 @@ function DisplaySongs (props){
               <td>{album}</td>
               <td>{release_date}</td>
               <td>{genre}</td>
-              <button onClick={()=>props.deleteSong(song.id)}>Delete Song</button>
+              <button className="button-two" onClick={()=>props.deleteSong(song.id)}>Delete Song</button>
             </tr>
           )
-        })
+        });
       }
      
       const renderSongsHeader =()=> {
@@ -32,25 +33,20 @@ function DisplaySongs (props){
     
 
       return (
+        
           <div>
-              <table>
-                  <th> {renderSongsHeader()} </th>
-                  <tr>{renderSongsTable()}</tr>
+              <h1 id="title" >Songs</h1>
+              <table id="table">
+                  
+                   {renderSongsHeader()}
+                  
+                  
+                   {renderSongsTable()}
+                  
               </table>
           </div>
       )
-    // return (
-    //         <div>
-    //         <h1 id='title'>Songs Table</h1>
-    //         <table id="songs">
-    //             <tbody>
-    //             <tr>{this.renderSongsHeader()}</tr>
-    //                 {this.renderSongsTable()}
-    //             </tbody>
-    //         </table>
-    //         </div>
-      
-    // );
+
 }
 
 export default DisplaySongs;
